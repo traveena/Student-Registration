@@ -86,7 +86,7 @@ const UserList = () => {
           renderCard()
         ) : (
           <p className="text-center col-span-2 text-gray-700 font-semibold">
-            No User
+            No Students
           </p>
         )}
       </div>

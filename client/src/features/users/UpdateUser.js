@@ -32,7 +32,7 @@ const UpdateUser = () => {
     console.log("====================================");
 
     dispatch(
-      updateUser({ id: params.id, fname: values.fname,lname: values.lname, email: values.email, contact_no:values.contact_no, age: values.age })
+      updateUser({ id: params.id, ...values})
     );
 
     navigate("/");
