@@ -1,9 +1,12 @@
 from flask import Flask, jsonify, request
 from models import Base, engine
 from db_conn import DBConn
+from flask_cors import CORS
+
+
 
 app = Flask(__name__)
-
+CORS(app)
 
 # Student CRUD
 @app.route('/students', methods=['GET'])
@@ -12,7 +15,7 @@ def students():
     return {"data": data}
 
 
-@app.route('/student', methods=['POST', 'PUT', 'DELETE'])
+@app.route('/student', methods=['POST','GET','PUT', 'DELETE'])
 def student():
     if request.method == 'POST':
         db.student_insert(request.form)
@@ -22,6 +25,7 @@ def student():
 
     elif request.method == 'DELETE':
         db.student_delete(request.args)
+        
 
     return jsonify({'data': "student success"})
 

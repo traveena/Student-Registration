@@ -13,6 +13,7 @@ class DBConn:
         students = self.session.query(Student).all()
         studs = [
             {
+                "sid":student.sid,
                 "fname": student.fname,
                 "lname": student.lname,
                 "email": student.email,
@@ -62,6 +63,7 @@ class DBConn:
         courses = self.session.query(Course).all()
         cour = [
             {
+                "cid":course.cid,
                 "coursename": course.coursename,
                 "description": course.description,
                 "duration": course.duration

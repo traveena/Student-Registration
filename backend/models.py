@@ -1,7 +1,7 @@
 import sqlalchemy as s
 from sqlalchemy.ext.declarative import declarative_base
 
-engine = s.create_engine("postgresql://postgres:070899@localhost:5432/student_registration")
+engine = s.create_engine("postgresql://postgres:admin@localhost:5432/student_registration")
 Base = declarative_base()
 
 

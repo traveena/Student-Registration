@@ -1,35 +1,62 @@
-import React from "react";
+import React, { useEffect } from "react";
 import WidgetButton from "../../components/WidgetButton";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteUser } from "./userSlice";
+import { deleteUser } from "./APIcalls";
+import { getUser } from "./APIcalls";
+
 
 const UserList = () => {
   const dispatch = useDispatch();
-  const users = useSelector((store) => store.users);
+  const {users,isFetching} = useSelector((store) => store.users);
+  //const {isFetching,error,users} = userState;
+  console.log(users)
+  // const [users, setusers ] = useState({})
+  // const {user} = useSelector((state) => state.user);
 
-  console.log("====================================");
-  console.log(users);
-  console.log("====================================");
+  // useEffect(() => {
+  //   const getProduct = async () => {
+  //     try {
+  //       const res = await publicRequest.get(`/students`);
+  //       console.log(res.data.data)
+  //       setusers(res.data.data);
+  //     } catch {}
+  //   };
+  //   getProduct();
+  // }, []);
 
-  const handleRemoveUser = (id) => {
-    dispatch(deleteUser({ id }));
+  useEffect(() => {
+    getUser(dispatch);
+  }, [dispatch]);
+
+
+  // console.log("====================================");
+  // console.log(users);
+  // console.log("====================================");
+
+
+  const handleRemoveUser = (sid) => {
+    deleteUser(sid,dispatch);
   };
 
+  if (isFetching) {
+    return <>LOADING</>
+  }
   const renderCard = () =>
     users.map((user) => (
       <div
-        className="bg-green-200 p-5 flex items-center justify-between h-[9rem]"
-        key={user.id}
+        className="bg-green-200 p-5 flex items-center justify-between h-[10rem]"
+        key={user.sid}
       >
         <div>
           <h3 className="font-bold text-lg text-gray-700">{user.fname} {user.lname}</h3>
           <span className="font-normal text-gray-600 text-base"><b>Gmail: </b>{user.email}</span>
-          <p className="font-normal text-gray-600 text-base"><b>Contact No: </b>{user.contact_no}</p>
-          <p className="font-normal text-gray-600 text-base"><b>DOB: </b>{user.age}</p>
+          <p className="font-normal text-gray-600 text-base"><b>Course Name: </b>{user.coursename}</p>
+          <p className="font-normal text-gray-600 text-base"><b>Contact No: </b>{user.contactno}</p>
+          <p className="font-normal text-gray-600 text-base"><b>DOB: </b>{user.dob}</p>
         </div>
         <div className="flex gap-2">
-          <Link to={`/edit-user/${user.id}`}>
+          <Link to={`/edit-user/${user.sid}`}>
             <button>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -47,7 +74,7 @@ const UserList = () => {
               </svg>
             </button>
           </Link>
-          <button onClick={() => handleRemoveUser(user.id)}>
+          <button onClick={() => handleRemoveUser(user.sid)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"

@@ -3,42 +3,39 @@ import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import WidgetTextfield from "../../components/WidgetTextfield";
 import WidgetButton from "../../components/WidgetButton";
-import { addUser } from "./userSlice";
+import { addUser } from "./APIcalls";
 import { v4 as uuidv4 } from "uuid";
+import axios from "axios";
 
 const AddUser = () => {
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
-  const [values, setValues] = useState({
-    fname: "",
-    lname:"",
-    email: "",
-    contact_no:"",
-    age: ""
+  const [values, setValues] = useState({});
 
-  });
-
-  const handleAddUser = () => {
-    setValues({ fname: "", lname:"", email: "", contact_no:"", age:""});
-
+  const handleAddUser = (e) => {
+    setValues({ fname: "", lname:"", email: "",coursename:"", contactno:"", dob:""});
     console.log("====================================");
     console.log(values);
     console.log("====================================");
 
-    dispatch(
-      addUser({
-        id: uuidv4(),
-        fname: values.fname,
-        lname: values.lname,
-        email: values.email,
-        contact_no: values.contact_no,
-        age:values.age
-      })
-    );
 
-    navigate("/");
+    const user = {...values,sid:uuidv4()}
+
+    // axios.post(`http://localhost:5000/students`,values)
+    // .then(res => {
+    //   const persons = res.values;
+
+    //   console.log(persons)
+    // })
+   
+      addUser(
+       user, dispatch
+      )
+   
+
+    // navigate("/");
   };
 
   return (
@@ -49,33 +46,34 @@ const AddUser = () => {
         onChange={(e) => setValues({ ...values, fname: e.target.value })}
         inputProps={{ type: "text", placeholder: "Enter Student first name here" }}
       />
-      <br />
       <WidgetTextfield
         label="Last Name :"
         value={values.lname}
         onChange={(e) => setValues({ ...values, lname: e.target.value })}
         inputProps={{ type: "text", placeholder: "Enter Student first name here" }}
       />
-       <br />
       <WidgetTextfield
         label="Email :"
         value={values.email}
         onChange={(e) => setValues({ ...values, email: e.target.value })}
         inputProps={{ type: "email", placeholder: "Enter Student email here" }}
       />
-       <br />
+       <WidgetTextfield
+        label="Course Name"
+        onChange={(e) => setValues({ ...values, coursename :e.target.value })}
+        inputProps={{ type: "text", placeholder: "Enter Course Name here" }}
+      />
        <WidgetTextfield
         label="Contact Number :"
-        value={values.contact_no}
-        onChange={(e) => setValues({ ...values, contact_no: e.target.value })}
+        value={values.contactno}
+        onChange={(e) => setValues({ ...values, contactno: e.target.value })}
         inputProps={{ type: "tel", placeholder: "Enter Student contact_no here" }}
       />
-       <br />
       <WidgetTextfield
         label="DOB :"
-        value={values.age}
-        onChange={(e) => setValues({ ...values, age: e.target.value })}
-        inputProps={{ type: "date", placeholder: "Enter the age of student" }}
+        value={values.dob}
+        onChange={(e) => setValues({ ...values, dob: e.target.value })}
+        inputProps={{ type: "date", placeholder: "Enter the Date Of Birth" }}
       />
       <WidgetButton onClick={handleAddUser}>Submit</WidgetButton>
     </div>

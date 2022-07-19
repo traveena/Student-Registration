@@ -1,33 +1,58 @@
-import React from "react";
+import React, { useEffect } from "react";
 import WidgetButton from "../../components/WidgetButton";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteCourse } from "./courseSlice";
-
+import { deleteCourse } from "./APIcalls";
+import { getCourse } from "./APIcalls";
 const UserList = () => {
   const dispatch = useDispatch();
-  const Courses = useSelector((store) => store.courses);
+const Courses = useSelector((store) => store.courses.courses);
+// const history = useHistory();
 
   console.log("====================================");
   console.log(Courses);
   console.log("====================================");
 
+  const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   const getProduct = async () => {
+  //     try {
+  //       const res = await publicRequest.get(`/courses`);
+  //       console.log(res.data.data)
+  //       // setusers(res.data.data);
+  //     } catch {}
+  //   };
+  //   getProduct();
+  // }, []);
+
+
+  useEffect(() => {
+    getCourse(dispatch);
+  }, [dispatch]);
+
+  // history.push("/show-course")
+
   const handleRemoveUser = (id) => {
-    dispatch(deleteCourse({ id }));
+   deleteCourse(id,dispatch)
+
+   navigate("/");
   };
 
   const renderCard = () =>
   Courses.map((course) => (
       <div
-        className="bg-green-200 p-5 flex items-center justify-between h-[9rem]"
-        key={course.id}
+        className="bg-green-200 p-5 flex items-center justify-between h-[12rem]"
+        key={course.cid}
       >
         <div>
-          <h3 className="font-bold text-lg text-gray-700">Course Name : {course.cname}</h3>
-          <span className="font-normal text-gray-600"><b>Course Description </b>: {course.desc}</span>
+          <h3 className="font-bold text-lg text-gray-700">Course Name : {course.coursename}</h3>
+          <span className="font-normal text-gray-600"><b>Course Description </b>: {course.description}</span>
+          <br/>
+          <span className="font-normal text-gray-600"><b>Course Duration </b>: {course.duration}</span>
         </div>
         <div className="flex gap-2">
-          <Link to={`/edit-course/${course.id}`}>
+          <Link to={`/edit-course/${course.cid}`}>
             <button>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +70,7 @@ const UserList = () => {
               </svg>
             </button>
           </Link>
-          <button onClick={() => handleRemoveUser(course.id)}>
+          <button onClick={() => handleRemoveUser(course.cid)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
