@@ -26,7 +26,7 @@ const AddCourse = () => {
       console.log(values);
       console.log("====================================");
 
-      const course = {...values,cid:uuidv4()}
+      const course = {...values}
   
       // dispatch(
       //   add_Course({
@@ -54,8 +54,8 @@ const AddCourse = () => {
        <br />
       <WidgetTextfield
         label="Course Description :"
-         value={values.descripton}
-        onChange={(e) => setValues({ ...values, descripton: e.target.value })}
+         value={values.description}
+        onChange={(e) => setValues({ ...values, description: e.target.value })}
         inputProps={{ type: "text", placeholder: "Enter Course Description" }}
       />
          <br />

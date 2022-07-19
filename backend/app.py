@@ -28,7 +28,7 @@ def student():
 
 @app.route('/student/<sid>', methods=['PUT'])
 def stu(sid):
-    db.student_update(request,json, sid)
+    db.student_update(request.json, sid)
 
     # elif request.method == 'DELETE':
     #     db.student_delete(sid)

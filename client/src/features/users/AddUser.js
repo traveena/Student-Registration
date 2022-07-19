@@ -21,7 +21,7 @@ const AddUser = () => {
     console.log("====================================");
 
 
-    const user = {...values,sid:uuidv4()}
+    const user = {...values}
 
     // axios.post(`http://localhost:5000/students`,values)
     // .then(res => {
@@ -35,7 +35,7 @@ const AddUser = () => {
       )
    
 
-    // navigate("/");
+    navigate("/");
   };
 
   return (
