@@ -34,32 +34,23 @@ class DBConn:
             contactno=request.json['contactno'],
             dob=request.json['dob']
 
-
-            # fname=data['firstname'],
-            # lname=data['lastname'],
-            # email=data['email'],
-            # coursename=data['course'],
-            # contactno=data['contactno'],
-            # dob=data['dob']
         )
         self.session.add(new_student)
         self.session.commit()
         return
 
-    def student_update(self, argus):
-        id = argus['sid']
-        data = {
-            "fname": argus['firstname'],
-            "lname": argus['lastname'],
-            "contactno": argus['contactno'],
-            "email": argus['email'],
-            "dob": argus['dob'],
-            "coursename": argus['course']
-        }
-
-        self.session.query(Student).filter(Student.sid == id).update(data)
-        self.session.commit()
-        return
+    def student_update(self, argus, id):
+            data = {
+                "fname": argus['fname'],
+                "lname": argus['lname'],
+                "contactno": argus['contactno'],
+                "email": argus['email'],
+                "dob": argus['dob'],
+                "coursename": argus['coursename']
+            }
+            self.session.query(Student).filter(Student.sid == id).update(data)
+            self.session.commit()
+            return
 
     def student_delete(self, args):
         id = args['sid']
@@ -87,16 +78,13 @@ class DBConn:
             description=request.json['description'],
             duration=request.json['duration']
 
-            # coursename=data['coursename'],
-            # description=data['description'],
-            # duration=data['duration']
         )
         self.session.add(new_course)
         self.session.commit()
         return
 
-    def course_update(self, argus):
-        id = argus['cid']
+    def course_update(self, argus, id):
+    
         data = {
             "coursename": argus['coursename'],
             "description": argus['description'],

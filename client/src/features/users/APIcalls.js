@@ -42,7 +42,7 @@ export const updateUser = async (id, user, dispatch) => {
   dispatch(updateUserStart());
   try {
     // update
-    const res = await publicRequest.put(`/student?sid=${id}`,user);
+    const res = await publicRequest.put(`/student/sid=${id}`,user);
     dispatch(updateUserSuccess({ id, user }));
   } catch (err) {
     dispatch(updateUserFailure());
@@ -94,7 +94,7 @@ export const addCourses = async (course, dispatch) => {
   try {
   console.log("courses...............")
   console.log(course) 
-   const res = await publicRequest.post(`/course?`, course);
+   const res = await publicRequest.post(`/course`, course);
    console.log("response")
    console.log(res);
     dispatch(addCoursesSuccess(res.data.data));
