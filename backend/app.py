@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request
 from models import Base, engine
 from db_conn import DBConn
-from flask_cors import CORS
+from  flask_cors import CORS
 
 
 

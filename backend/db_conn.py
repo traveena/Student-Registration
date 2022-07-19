@@ -1,4 +1,5 @@
 from models import Student, Course
+from flask import request
 import sqlalchemy
 
 
@@ -24,13 +25,22 @@ class DBConn:
         return studs
 
     def student_insert(self, data):
+  
         new_student = Student(
-            fname=data['firstname'],
-            lname=data['lastname'],
-            email=data['email'],
-            coursename=data['course'],
-            contactno=data['contactno'],
-            dob=data['dob']
+            fname=request.json['fname'],
+            lname=request.json['lname'],
+            email=request.json['email'],
+            coursename=request.json['coursename'],
+            contactno=request.json['contactno'],
+            dob=request.json['dob']
+
+
+            # fname=data['firstname'],
+            # lname=data['lastname'],
+            # email=data['email'],
+            # coursename=data['course'],
+            # contactno=data['contactno'],
+            # dob=data['dob']
         )
         self.session.add(new_student)
         self.session.commit()
@@ -71,10 +81,15 @@ class DBConn:
         return cour
 
     def course_insert(self, data):
+
         new_course = Course(
-            coursename=data['coursename'],
-            description=data['description'],
-            duration=data['duration']
+            coursename=request.json['coursename'],
+            description=request.json['description'],
+            duration=request.json['duration']
+
+            # coursename=data['coursename'],
+            # description=data['description'],
+            # duration=data['duration']
         )
         self.session.add(new_course)
         self.session.commit()
