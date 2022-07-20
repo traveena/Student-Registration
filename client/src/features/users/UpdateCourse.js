@@ -35,7 +35,7 @@ const UpdateCourse = () => {
     //     updateCourse({ id: params.id, cname: values.cname,desc: values.desc})
     // );
     updateCourse(params.id,values,dispatch)
-    navigate("/");
+    navigate("/show-course");
   };
   return (
     <div className="mt-10 max-w-xl mx-auto">

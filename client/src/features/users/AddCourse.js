@@ -37,7 +37,7 @@ const AddCourse = () => {
       // );
       addCourses(course,dispatch);
 
-        navigate("/");
+        navigate("/show-course");
 
 
     }
