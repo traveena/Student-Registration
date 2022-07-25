@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: 'studentregistration-backend'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_81BE8A0C2438401FA1A7921BAAAB3F19 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_61AEE52B0B774BAB8E48A16F53F65A05 }}
