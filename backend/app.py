@@ -8,6 +8,8 @@ from  flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)
+Base.metadata.create_all(engine)
+db = DBConn(engine)
 
 # Student CRUD
 @app.route('/students', methods=['GET'])
@@ -77,6 +79,4 @@ def cours(cid):
     return jsonify({'data': "course success"})
 
 if __name__ == '__main__':
-    Base.metadata.create_all(engine)
-    db = DBConn(engine)
     app.run(debug=True)
