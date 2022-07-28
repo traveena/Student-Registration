@@ -5,6 +5,9 @@ engine = s.create_engine("postgresql://postgres@student-registration:Admin1234@s
 Base = declarative_base()
 
 
+
+# dbname='{your_database}' user='postgres@student-registration' host='student-registration.postgres.database.azure.com' password='{your_password}' port='5432' sslmode='true'
+
 class Student(Base):
     __tablename__ = 'student'
 

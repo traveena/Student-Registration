@@ -79,4 +79,11 @@ def cours(cid):
     return jsonify({'data': "course success"})
 
 if __name__ == '__main__':
+<<<<<<< HEAD
     app.run(debug=True)
+=======
+    Base.metadata.create_all(engine)
+    db = DBConn(engine)
+    app.debug = True
+    app.run()
+>>>>>>> f51d563292af645ae1e18aaee9738e403d388be7
