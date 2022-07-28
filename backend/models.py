@@ -1,9 +1,12 @@
 import sqlalchemy as s
 from sqlalchemy.ext.declarative import declarative_base
 
-engine = s.create_engine("postgresql://postgres:admin@localhost:5432/student_registration")
+engine = s.create_engine("postgresql://postgres@student-registration:Admin1234@student-registration.postgres.database.azure.com:5432/student_registration")
 Base = declarative_base()
 
+
+
+# dbname='{your_database}' user='postgres@student-registration' host='student-registration.postgres.database.azure.com' password='{your_password}' port='5432' sslmode='true'
 
 class Student(Base):
     __tablename__ = 'student'

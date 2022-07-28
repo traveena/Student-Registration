@@ -79,4 +79,5 @@ def cours(cid):
 if __name__ == '__main__':
     Base.metadata.create_all(engine)
     db = DBConn(engine)
-    app.run(debug=True)
+    app.debug = True
+    app.run()
